@@ -11,7 +11,7 @@
 </head>
 <body>
 <a href="{{ route('posts.create')}}">Criar novo Post</a> ||
-<a href="{{ route('posts.trashed')}}">Ver Lixeira</a>
+<a href="{{ route('posts.index')}}">Ver Todos</a>
 <div class="container my-5">
     @if (!empty($posts))
     <section class="articles_list">
@@ -21,11 +21,11 @@
             <h2>{{ $post-> subtitle }}</h2>
             <p>{{ $post-> description }}</p>
             <small>Criado em: {{ $post->created_at->format('d/m/Y H:i') }} - Editado em: {{ $post->updated_at->format('d/m/Y H:i') }}</small>
-            <a href="{{ route('posts.edit', ['post' => $post->id])}}">Editar este Post</a> ||
-            <form action="{{route('posts.destroy', ['post' => $post->id])}}" method="post">
+            <a href="{{ route('posts.restore', ['post' => $post->id])}}">Restaurar este Post</a> ||
+            <form action="{{route('posts.forceDelete', ['post' => $post->id])}}" method="post">
                 @csrf
                 @method('DELETE')
-                <button type="submit">Deletar este Post</button>
+                <button type="submit">Excluir este Post permanentemente!</button>
             </form>
         </article>
         <hr>
